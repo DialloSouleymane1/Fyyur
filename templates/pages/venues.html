@@ -1,0 +1,27 @@
+{% extends 'layouts/main.html' %}
+{% block title %}Fyyur | Venues{% endblock %}
+{% block content %}
+{% for area in areas %}
+<h3>{{ area.city }}, {{ area.state }}</h3>
+	<div id="error" class="hidden">
+		An error occurred, please try again.
+	</div>
+	<ul class="items">
+		{% for venue in area.venues %}
+		<li>
+			<a href="/venues/{{ venue.id }}">
+				<i class="fas fa-music"></i>
+				<div class="item">
+					<h5>{{ venue.name }}</h5>
+				</div>
+			</a>
+			<form action="/venues/delete" method="POST">
+				<button value="{{venue.id}}" name="venue_id" class="delete_venues">
+				  <b> 🗑 </b>
+				</button>
+			</form>
+		</li>
+		{% endfor %}
+	</ul>
+{% endfor %}
+{% endblock %}
